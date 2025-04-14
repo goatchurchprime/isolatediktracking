@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://scjbl5b0r1b7"]
+
+[ext_resource type="Script" uid="uid://m5c0gefm1hc1" path="res://dance_bone.gd" id="1_sa8hx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sa8hx"]
+albedo_color = Color(0.427451, 1, 1, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_kek77"]
+top_radius = 0.07
+bottom_radius = 0.1
+height = 0.5
+radial_segments = 12
+
+[node name="DanceBone" type="Node3D"]
+script = ExtResource("1_sa8hx")
+
+[node name="CSGScaler" type="CSGCombiner3D" parent="."]
+material_override = SubResource("StandardMaterial3D_sa8hx")
+
+[node name="CSGRod" type="CSGMesh3D" parent="CSGScaler"]
+mesh = SubResource("CylinderMesh_kek77")
+
+[node name="CSGSphereTop" type="CSGSphere3D" parent="CSGScaler/CSGRod"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+radius = 0.07
+
+[node name="CSGSphereBottom" type="CSGSphere3D" parent="CSGScaler/CSGRod"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+radius = 0.1
